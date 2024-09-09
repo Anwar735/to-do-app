@@ -1,61 +1,54 @@
-const inputBox = document.getElementById("inputBox");
-const listContainer = document.getElementById("list container");
-function addTask() {
-    if (inputBox.value === '') {
-        alert("you must write somwthing!");
-    }
-    else {
-        let li = document.createElement("li");
-        li.innerHTML = inputBox.value;
-        listContainer.appendChild(li);
-        let span = document.createElement("span");
-          span.innerHTML = "\u00d7";
-           li.appendChild(span);
+const todoitem = document.getElementById("inputBox");
+const listContainer = document.getElementById("list-container");
+function addTodo() {
+  if (todoitem.value === '') {
+    alert("you must write somwthing!");
+  }
+ else {
+    let li = document.createElement("li");
+    li.innerHTML = todoitem.value;
+    listContainer.appendChild(li);
 
-           inputBox.value = '';
-    }
-       
-        let editButton = document.createElement('button');
-                editButton.innerText = 'Edit';
-                editButton.onclick = () => editTask(index);
-                li.appendChild(editButton);
+    var delBtn = document.createElement("button");
+    var delText = document.createTextNode("DELETE");
+    delBtn.setAttribute("class", "btn");
+    // passed this as deleteItem () argument:
+    delBtn.setAttribute("onclick", "deleteItem(this)");
+    delBtn.appendChild(delText);
 
-                inputBox.value = '';
 
-}
+    var editBtn = document.createElement("button");
+    var editText = document.createTextNode("EDIT");
+    editBtn.appendChild(editText);
+    editBtn.setAttribute("onclick", "editItem(this)");
 
+
+
+    li.appendChild(delBtn);
+    li.appendChild(editBtn);
+    list.appendChild(li);
+        
+    
+  }
+    
+       todoitem.value = '';
   
 
-   listContainer.addEventListener("click", function (e){
-       if (e.target.tagName === "LI") {
-        e.target.ClassList.toggle("checked");
-        // saveData();
-    }
-      
-         else if (e.target.tagName === "SPAN") {
-
-                 e.target.parentElement.remove();
-        //   saveData();
-    }
-    
-
-},false);
-
-     function editTask(index) {
-        const newTaskText = prompt("Edit the task:", tasks[index]);
-       if (newTaskText !== null && newTaskText.trim() !== "") {
-            tasks[index] = newTaskText; // Update the task
-              renderTasks();
-
-
-    
-//     localStorage.setItem("data" , listContainer.innerHTML);
-
-// function showTask() {
-//    listContainer.innerHTML = localStorage.getItem("data");
-// }
-//     showTask();
-  
-
-    }
 }
+    
+    function deleteItem(e) {
+       e.parentNode.remove();
+}
+     function editItem(e) {
+      var val = e.parentNode.firstChild.nodeValue;
+         var editValue = prompt("Enter edit value", val);
+
+          e.parentNode.firstChild.nodeValue = editValue;
+}
+
+
+
+
+
+
+
